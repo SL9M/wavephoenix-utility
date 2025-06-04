@@ -1,0 +1,4 @@
+/build/
+/dist/
+*.code-workspace
+.DS_Store
