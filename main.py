@@ -1,35 +1,35 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton, QSizePolicy
-from PyQt6.QtGui import QMovie
+from PyQt6.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton
+from PyQt6.QtGui import QIcon
+
+# Handle resource path for packaged app
+if getattr(sys, 'frozen', False):  # Check if running in a packaged app (frozen state)
+    icon_path = os.path.join(sys._MEIPASS, 'resources', 'icon.ico')
+else:
+    icon_path = 'resources/icon.ico'
 
 # Initialize application and main window with layout
 app = QApplication([])
+app.setWindowIcon(QIcon(icon_path)) # Set App icon
 window = QWidget()
-background = QLabel(window)
 layout = QVBoxLayout()
 # Initialize UI Componenets
 layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-window.setWindowTitle("Upload Files - WavePhoenix Utility")
-label = QLabel("Get Started. (Hello World)")
-start_button_home = QPushButton("Get Started")
-start_button_home.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-
-
+window.setWindowIcon(QIcon(icon_path))
 
 
 
 
 # Window Content
-layout.addWidget(label)
-layout.addWidget(start_button_home)
-window.setLayout(layout)
-
+window.setWindowTitle("Upload Files - WavePhoenix Utility")
+layout.addWidget(QLabel("First we need to download a few things."))
+layout.addWidget(QPushButton("Get Started"))
 
 
 
 
 # Finalize GUI and run the app
-window.resize(300, 100)
+window.setLayout(layout)
+window.resize(600, 300)
 window.show()
 app.exec()
-
