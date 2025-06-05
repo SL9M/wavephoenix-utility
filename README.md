@@ -1,5 +1,15 @@
-WavePhoenix Utility
+# WavePhoenix Utility
 
-A GUI based program written to help users unfamiliar with commandline tools flash their wavephoenix receivers.
+A GUI based program written to help users unfamiliar with commandline tools flash their WavePhoenix receivers. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
 
-Ideal for DIYers, bulk wavephoenix flashing, and people who dislike memorizing or hunting down commands.
+## Current Features
+1. Prompt user to download all essential files
+2. File upload fields that should work with future updates
+3. Step by step on screen instructions
+4. Extracts OpenOCD tar files to reduce friction
+5. Seperate window with console output for debugging
+
+## Planned Features
+1. Continuous bulk flashing
+2. Optional Pico probe uf2 flashing - for users who've never flashed a pico
+
