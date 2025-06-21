@@ -1,7 +1,12 @@
 from src.mainWindow import mainWindow
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
 
+
 def step1(layout):
+
+    #Next step button logic
+    nextButton = QPushButton("Next Step")
+    nextButton.setEnabled(False)
 
     #Download variables
     openocdlink = QLabel('<a href="https://github.com/loopj/openocd-efm32s2/releases/download/latest/openocd-c9fd9f6a2-i686-w64-mingw32.tar.gz">OpenOCD tar file from GitHub (loopj/openocd-efm32s2)</a>')
@@ -70,7 +75,7 @@ def step1(layout):
 
 
     # Step 1 Instructions
-    step1title= QLabel("Step 1: Download Required Files")
+    step1title= QLabel("Step 1: Gather Required Files")
     step1title.setStyleSheet("font-size:20px; font-weight:bold;")
     layout.addWidget(step1title)
 
@@ -86,4 +91,6 @@ def step1(layout):
     layout.addWidget(uploadReceiverInput)
     layout.addWidget(uploadReceiverButton)
 
-    layout.addWidget(QPushButton("Next Step"))
+    layout.addSpacing(40)
+
+    layout.addWidget(nextButton)

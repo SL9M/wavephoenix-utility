@@ -1,5 +1,3 @@
-# install-python-and-packages.ps1
-
 # Install Python 3.13 via winget
 Write-Host "Installing Python 3.13..."
 winget install --id=Python.Python.3.13 -e
