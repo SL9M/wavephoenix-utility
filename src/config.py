@@ -5,6 +5,7 @@ import os
 if getattr(sys, 'frozen', False):  # Running as a PyInstaller bundle
     base_dir = sys._MEIPASS
 else:  # Running as a normal Python script
-    base_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-openocdpath = os.path.join(base_dir, "ocd", "bin", "openocd.exe")
+
+openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd.exe")

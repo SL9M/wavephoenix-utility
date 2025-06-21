@@ -13,11 +13,6 @@ Built with Python & Qt6.
 6. Support for Windows
 
 ## Planned Features
-1. Continuous bulk flashing
-2. Optional Pico probe uf2 flashing - for users who've never flashed a pico
+1. Bulk flashing mode - For saving time on assembly
 3. Support for macOS and Linux
-
-## Build Instructions
-For macOS and Linux users, you can simply run nix-shell in the project directory. then run "pyinstaller main.spec" 
-
-For windows, use winget or similar to obtain all of the project dependencies then run the same command.
+4. OpenOCD Error handling with troubleshooting docs

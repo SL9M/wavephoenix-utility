@@ -1,6 +1,6 @@
 from src.mainWindow import mainWindow
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
-
+from src.config import openocdpath
 
 def step1(layout):
 
@@ -16,7 +16,6 @@ def step1(layout):
     bootloaderlink.setOpenExternalLinks(True)
     receiverlink.setOpenExternalLinks(True)
 
-    openocdpath = ""
     bootloaderpath = ""
     receiverpath = ""
 
@@ -52,6 +51,7 @@ def step1(layout):
     uploadReceiverButton.clicked.connect(file_dialog_receiver)
     # Input fields
     uploadOpenOcdInput = QLineEdit()
+    uploadOpenOcdInput.setText(openocdpath)
     uploadBootloaderInput = QLineEdit()
     uploadReceiverInput = QLineEdit()
 

@@ -7,7 +7,8 @@ a = Analysis(
     binaries=[],
     datas = [
         ('resources/*', 'resources'),
-        ('src/*', 'src')
+        ('src/*', 'src'),
+        ('openocd/*', 'openocd')
     ],
     hiddenimports=[],
     hookspath=[],
