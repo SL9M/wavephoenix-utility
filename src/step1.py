@@ -1,12 +1,14 @@
 from src.mainWindow import mainWindow
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
 from src.config import openocdpath
+from src.step2 import step2
+# Step 1 Gather
 
 def step1(layout):
 
     #Next step button logic
     nextButton = QPushButton("Next Step")
-    nextButton.setEnabled(False)
+    #nextButton.setEnabled(False)
 
     #Download variables
     openocdlink = QLabel('<a href="https://github.com/loopj/openocd-efm32s2/releases/download/latest/openocd-c9fd9f6a2-i686-w64-mingw32.tar.gz">OpenOCD tar file from GitHub (loopj/openocd-efm32s2)</a>')
@@ -16,12 +18,9 @@ def step1(layout):
     bootloaderlink.setOpenExternalLinks(True)
     receiverlink.setOpenExternalLinks(True)
 
-    bootloaderpath = ""
-    receiverpath = ""
-
     #Upload Dialogs and path storage
     def file_dialog_openocd():
-        openocdpath, _ = QFileDialog.getOpenFileName(None, "Open File", "", "Gzipped Tar Files (*.tar.gz *.tgz);;Tar Files (*.tar);;All Files (*)")
+        openocdpath, _ = QFileDialog.getOpenFileName(None, "Select OpenOCD Executable", "", "All Files (*)")
         if openocdpath:
             print(f"Selected file: {openocdpath}")
             uploadOpenOcdInput.setText(openocdpath)
@@ -94,3 +93,14 @@ def step1(layout):
     layout.addSpacing(40)
 
     layout.addWidget(nextButton)
+
+    # Proceed to step2 if button is pressed
+    def go_to_step2():
+        while layout.count():
+            clearEach = layout.takeAt(0)
+            if clearEach.widget():
+                clearEach.widget().deleteLater()
+        
+        step2(layout)
+
+    nextButton.clicked.connect(go_to_step2)
