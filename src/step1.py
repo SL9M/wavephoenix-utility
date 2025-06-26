@@ -1,8 +1,6 @@
-from src.mainWindow import mainWindow
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
 from src.config import openocdpath
 from src.step2 import step2
-# Step 1 Gather
 
 def step1(layout):
 
@@ -102,5 +100,4 @@ def step1(layout):
                 clearEach.widget().deleteLater()
         
         step2(layout)
-
     nextButton.clicked.connect(go_to_step2)
