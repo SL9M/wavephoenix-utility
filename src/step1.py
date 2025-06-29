@@ -1,6 +1,8 @@
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
-from src.config import openocdpath
+from src.config import openocdpath, bootloaderpath, receiverpath
+import src.config
 from src.step2 import step2
+import src.config
 
 def step1(layout):
 
@@ -24,17 +26,18 @@ def step1(layout):
             uploadOpenOcdInput.setText(openocdpath)
             return openocdpath
     def file_dialog_bootloader():
-        bootloaderpath, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
-        if bootloaderpath:
-            print(f"Selected file: {bootloaderpath}")
-            uploadBootloaderInput.setText(bootloaderpath)
-            return bootloaderpath
+        selected, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
+        if selected:
+            src.config.bootloaderpath = selected
+            print(f"Updated bootloader path: {src.config.bootloaderpath}")
+            uploadBootloaderInput.setText(src.config.bootloaderpath)
     def file_dialog_receiver():
-        receiverpath, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
-        if receiverpath:
-            print(f"Selected file: {receiverpath}")
-            uploadReceiverInput.setText(receiverpath)
-            return receiverpath
+        selected, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
+        if selected:
+            src.config.receiverpath = selected
+            print(f"Updated firmware path: {src.config.receiverpath}")
+            uploadReceiverInput.setText(src.config.receiverpath)
+
         
 
 
@@ -50,7 +53,9 @@ def step1(layout):
     uploadOpenOcdInput = QLineEdit()
     uploadOpenOcdInput.setText(openocdpath)
     uploadBootloaderInput = QLineEdit()
+    uploadBootloaderInput.setText(src.config.bootloaderpath)
     uploadReceiverInput = QLineEdit()
+    uploadReceiverInput.setText(src.config.receiverpath)
 
     #Handle manual text entry variable updating
     def uploadOpenOcdInput_changed():

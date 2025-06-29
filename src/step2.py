@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton
-from src.config import openocdpath
+import src.config
 import subprocess
 from src.step3 import step3
 
@@ -16,15 +16,16 @@ def step2(layout):
     def erase_device():
         try:
             eraseCommand = [
-                openocdpath,
+                src.config.openocdpath,
                 "-f", "interface\\cmsis-dap.cfg",
                 "-f", "target\\efm32s2.cfg",
                 "-c", "init; efm32s2_dci_device_erase; shutdown"
             ]
+            print(eraseCommand)
             eraseResult = subprocess.run(eraseCommand, capture_output=True, text=True, check=True)
-            print("Erase Success\n",eraseResult.stdout)
+            print("Erase success\n",eraseResult.stdout)
         except subprocess.CalledProcessError as eraseError:
-            print("Erase Error\n", eraseError.stderr)
+            print("Erase error\n", eraseError.stderr)
 
     # Create layout
     layout.addWidget(step2title)

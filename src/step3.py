@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton
-from src.config import openocdpath
+import src.config
 import subprocess
 from src.step4 import step4
 
@@ -16,16 +16,17 @@ def step3(layout):
     def flash_bootloader():
         try:
             bootloaderCommand = [
-                openocdpath,
+                src.config.openocdpath,
                 "-f", "interface\\cmsis-dap.cfg",
                 "-c", "transport select swd",
                 "-f", "target\\efm32s2.cfg",
-                "-c", "init; halt; flash write_image erase bootloader.hex; exit"
+                "-c", f'init; halt; flash write_image erase "{src.config.bootloaderpath}"; exit'
             ]
+            print(bootloaderCommand)
             bootloaderResult = subprocess.run(bootloaderCommand, capture_output=True, text=True, check=True)
-            print("Flash Bootloader Success\n",bootloaderResult.stdout)
+            print("Flash bootloader success\n",bootloaderResult.stdout)
         except subprocess.CalledProcessError as bootloaderError:
-            print("Flash Bootloader Error\n", bootloaderError.stderr)
+            print("Flash bootloader error\n", bootloaderError.stderr)
 
     # Create layout
     layout.addWidget(step3title)
