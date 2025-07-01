@@ -18,6 +18,6 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 ## Credits
 Credit for the WavePhoenix Utility project largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
 
-Special thanks to members of the GameCube modding community for inspiring me to solve this issue. Providing support has been 
+Special thanks to members of the GameCube modding community for inspiring me to solve this issue.
 
 Built with Python & Qt6, packaged using PyInstaller.
