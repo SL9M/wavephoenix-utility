@@ -16,7 +16,7 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 5. Optional Rpi Pico flashing
 
 ## Credits
-Credit for the WavePhoenix Utility project largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
+Credit largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
 
 Special thanks to members of the GameCube modding community for inspiring me to solve this issue.
 
