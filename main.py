@@ -8,10 +8,9 @@ app = QApplication([])
 window, layout, icon_path = mainWindow()
 app.setWindowIcon(QIcon(icon_path)) # Set App icon
 
-# Run Step 1
+# Start flashing process
 step1(layout)
 
-# End Body & Finalize
 window.setLayout(layout)
 window.show()
 app.exec()
