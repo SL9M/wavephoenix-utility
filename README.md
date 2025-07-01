@@ -1,18 +1,23 @@
 # WavePhoenix Utility
 
-A GUI based program written to help users unfamiliar with commandline tools flash their WavePhoenix receivers. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
-
-Built with Python & Qt6.
+GUI WavePhoenix flashing software written to help users unfamiliar with commandline tools. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
 
 ## Current Features
-1. Prompt user to download all essential files
-2. File upload fields that should work with future updates
-3. Step by step on screen instructions
-4. Extracts OpenOCD tar files to reduce friction
-5. Seperate window with console output for debugging
-6. Support for Windows
+1. Erase & flash WavePhoenix devices easily
+2. Links user to bootloader & firmware downloads
+3. Github release bundles include Loopj's OpenOCD fork - no extra software needed!
+4. Step by step on screen guide
+5. Seperate window with logs & console output for debugging and transparency
 
 ## Planned Features
-1. Bulk flashing mode - For saving time on assembly
-3. Support for macOS and Linux
-4. OpenOCD Error handling with troubleshooting docs
+1. "Pro" layout - for bulk flashing & time savings
+3. Support for macOS and Linux 
+4. Robust error handling with troubleshooting steps included
+5. Optional Rpi Pico flashing
+
+## Credits
+Credit for the WavePhoenix Utility project largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
+
+Special thanks to members of the GameCube modding community for inspiring me to solve this issue. Providing support has been 
+
+Built with Python & Qt6, packaged using PyInstaller.
