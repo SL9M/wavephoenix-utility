@@ -2,6 +2,14 @@
 
 GUI WavePhoenix flashing software written to help users unfamiliar with commandline tools. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
 
+## Usage
+1. Download latest release from Github releases page. - Chrome may flag it as suspicious, this is expected behavior due to the way it's packaging and executing command line tools. 
+2. Extract all contents in the zip file
+3. Launch the executable
+4. Accept any SmartScreen/Security prompts
+5. Upload your bootloader and firmware files to the GUI
+6. Follow the step by step guide and enjoy!
+
 ## Current Features
 1. Erase & flash WavePhoenix devices easily
 2. Links user to bootloader & firmware downloads
