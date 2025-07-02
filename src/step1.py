@@ -3,6 +3,7 @@ from src.config import openocdpath, bootloaderpath, receiverpath
 import src.config
 from src.step2 import step2
 import src.config
+import os
 
 def step1(layout):
 
@@ -12,13 +13,11 @@ def step1(layout):
 
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
-    probeTypeDropdown.addItems(["CMSIS-DAP", "ST-Link"])
+    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico)", "ST-Link"])
 
     #Download variables
-    openocdlink = QLabel('<a href="https://github.com/loopj/openocd-efm32s2/releases/download/latest/openocd-c9fd9f6a2-i686-w64-mingw32.tar.gz">OpenOCD tar file from GitHub (loopj/openocd-efm32s2)</a>')
     bootloaderlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">bootloader.hex</a>')
     receiverlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">receiver.hex')
-    openocdlink.setOpenExternalLinks(True)
     bootloaderlink.setOpenExternalLinks(True)
     receiverlink.setOpenExternalLinks(True)
 
@@ -42,7 +41,62 @@ def step1(layout):
             print(f"Updated firmware path: {src.config.receiverpath}")
             uploadReceiverInput.setText(src.config.receiverpath)
 
-        
+
+    # Conditionally change border color based on file path for openocdpath
+    def updateOpenocdBorder():
+        path = src.config.openocdpath.strip()  # get the current config variable
+        if path == "" or not os.path.isfile(path):
+            uploadOpenOcdInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid red;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """)
+        else:
+            uploadOpenOcdInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid green;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """)      
+    def updateBootloaderBorder():
+        path = src.config.bootloaderpath.strip()  # get the current config variable
+        if path == "" or not os.path.isfile(path):
+            uploadBootloaderInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid red;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """)
+        else:
+            uploadBootloaderInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid green;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """)     
+    def updateReceiverBorder():
+        path = src.config.receiverpath.strip()  # get the current config variable
+        if path == "" or not os.path.isfile(path):
+            uploadReceiverInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid red;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """)
+        else:
+            uploadReceiverInput.setStyleSheet("""
+                QLineEdit {
+                    border: 1px solid green;
+                    border-radius: 4px;
+                    padding: 4px;
+                }
+            """) 
 
 
     #Step 1 Upload variables
@@ -55,39 +109,47 @@ def step1(layout):
     uploadReceiverButton.clicked.connect(file_dialog_receiver)
     # Input fields
     uploadOpenOcdInput = QLineEdit()
-    uploadOpenOcdInput.setText(openocdpath)
+    uploadOpenOcdInput.setText(src.config.openocdpath)
     uploadBootloaderInput = QLineEdit()
     uploadBootloaderInput.setText(src.config.bootloaderpath)
     uploadReceiverInput = QLineEdit()
     uploadReceiverInput.setText(src.config.receiverpath)
 
+
     #Handle manual text entry variable updating
     def uploadOpenOcdInput_changed():
-        global openocdpath
-        openocdpath = uploadOpenOcdInput.text()
-        print(f"Updated OpenOCD path: {openocdpath}")
+        src.config.openocdpath = uploadOpenOcdInput.text()
+        print(f"Updated OpenOCD path to {src.config.openocdpath}")
+        updateOpenocdBorder()
     def uploadBootloaderInput_changed():
-        global bootloaderpath
-        bootloaderpath = uploadBootloaderInput.text()
-        print(f"Updated bootloader.hex path: {bootloaderpath}")
+        src.config.bootloaderpath = uploadBootloaderInput.text()
+        print(f"Updated bootloader.hex path to {src.config.bootloaderpath}")
+        updateBootloaderBorder()
     def uploadReceiverInput_changed():
         global receiverpath
         receiverpath = uploadReceiverInput.text()
-        print(f"Updated receiver.hex path: {receiverpath}")
-
+        print(f"Updated receiver.hex path to {src.config.bootloaderpath}")
+        updateReceiverBorder()
     uploadOpenOcdInput.textChanged.connect(uploadOpenOcdInput_changed)
     uploadBootloaderInput.textChanged.connect(uploadBootloaderInput_changed)
     uploadReceiverInput.textChanged.connect(uploadReceiverInput_changed)
 
 
-    # Step 1 Instructions
+    # Step 1 Layout
+
+    updateOpenocdBorder()
+    updateBootloaderBorder()
+    updateReceiverBorder()
+
     step1title= QLabel("Step 1: Gather Required Files")
     step1title.setStyleSheet("font-size:20px; font-weight:bold;")
     layout.addWidget(step1title)
 
-    layout.addWidget(openocdlink)
     layout.addWidget(uploadOpenOcdInput)
     layout.addWidget(uploadOpenOcdButton)
+
+    layout.addWidget(probeTypeDropdown)
+    layout.addSpacing(40)
 
     layout.addWidget(bootloaderlink)
     layout.addWidget(uploadBootloaderInput)

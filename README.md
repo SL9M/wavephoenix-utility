@@ -2,6 +2,9 @@
 
 GUI WavePhoenix flashing software written to help users unfamiliar with commandline tools. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
 
+![Step 1 Screenshot](/resources/step1screenshot.png "Step 1 Screenshot")
+
+
 ## Usage
 1. Download [latest release](https://github.com/SL9M/wavephoenix-utility/releases/latest)
  from Github releases page. - Chrome may flag it as suspicious, this is expected behavior due to the way it's packaging and executing command line tools. 
@@ -22,7 +25,7 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 1. "Pro" layout - for bulk flashing & time savings
 3. Support for macOS and Linux 
 4. Robust error handling with troubleshooting steps included
-5. Optional Rpi Pico flashing
+5. Support more probes
 
 ## Credits
 Credit largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
