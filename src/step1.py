@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit
+from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox
 from src.config import openocdpath, bootloaderpath, receiverpath
 import src.config
 from src.step2 import step2
@@ -9,6 +9,10 @@ def step1(layout):
     #Next step button logic
     nextButton = QPushButton("Next Step")
     #nextButton.setEnabled(False)
+
+    # Probe type dropdown variables
+    probeTypeDropdown = QComboBox()
+    probeTypeDropdown.addItems(["CMSIS-DAP", "ST-Link"])
 
     #Download variables
     openocdlink = QLabel('<a href="https://github.com/loopj/openocd-efm32s2/releases/download/latest/openocd-c9fd9f6a2-i686-w64-mingw32.tar.gz">OpenOCD tar file from GitHub (loopj/openocd-efm32s2)</a>')
