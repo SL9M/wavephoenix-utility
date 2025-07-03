@@ -1,6 +1,6 @@
 # WavePhoenix Utility
 
-GUI WavePhoenix flashing software written to help users unfamiliar with commandline tools. Ideal for DIYers, bulk WavePhoenix flashing, and people who dislike memorizing or hunting down commands for each flash.
+GUI WavePhoenix flashing software written to help users unfamiliar with commandline tools. Ideal for DIY, and bulk WavePhoenix flashing.
 
 ![Step 1 Screenshot](/resources/step1screenshot.png "Step 1 Screenshot")
 
