@@ -8,6 +8,8 @@ import os
 def step1(layout):
     #Next step button logic
     nextButton = QPushButton("Next Step")
+    nextButton.setFixedHeight(50)
+    nextButton.setStyleSheet("font-size: 15px;")
     #nextButton.setEnabled(False)
 
     # Probe type dropdown variables
@@ -60,8 +62,11 @@ def step1(layout):
 
     #Step 1 Upload variables
     uploadOpenOcdButton = QPushButton("Browse")
+    uploadOpenOcdButton.setFixedHeight(35)
     uploadBootloaderButton = QPushButton("Browse")
+    uploadBootloaderButton.setFixedHeight(35)
     uploadReceiverButton = QPushButton("Browse")
+    uploadReceiverButton.setFixedHeight(35)
     #Step 1 Button behavior settings
     uploadOpenOcdButton.clicked.connect(file_dialog_openocd)
     uploadBootloaderButton.clicked.connect(file_dialog_bootloader)
@@ -87,7 +92,6 @@ def step1(layout):
     def uploadReceiverInput_changed():
         global receiverpath
         receiverpath = uploadReceiverInput.text()
-        print(f"Updated receiver.hex path to {src.config.bootloaderpath}")
         updateReceiverBorder()
 
     uploadOpenOcdInput.textChanged.connect(uploadOpenOcdInput_changed)
