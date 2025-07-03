@@ -13,11 +13,11 @@ def step1(layout):
 
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
-    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico)", "ST-Link"])
+    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico, Default)", "ST-Link"])
 
     #Download variables
-    bootloaderlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">bootloader.hex</a>')
-    receiverlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">receiver.hex')
+    bootloaderlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">Download</a>')
+    receiverlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">Download')
     bootloaderlink.setOpenExternalLinks(True)
     receiverlink.setOpenExternalLinks(True)
 
@@ -32,7 +32,6 @@ def step1(layout):
         selected, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
         if selected:
             src.config.bootloaderpath = selected
-            print(f"Updated bootloader path: {src.config.bootloaderpath}")
             uploadBootloaderInput.setText(src.config.bootloaderpath)
     def file_dialog_receiver():
         selected, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
@@ -43,61 +42,22 @@ def step1(layout):
 
 
     # Conditionally change border color based on file path for openocdpath
+    def updateInputBorder(widget, path):
+        path = path.strip()
+        color = "green" if path and os.path.isfile(path) else "red"
+        widget.setStyleSheet(f"""
+            QLineEdit {{
+                border: 1px solid {color};
+                border-radius: 4px;
+                padding: 4px;
+            }}
+        """)
     def updateOpenocdBorder():
-        path = src.config.openocdpath.strip()  # get the current config variable
-        if path == "" or not os.path.isfile(path):
-            uploadOpenOcdInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid red;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """)
-        else:
-            uploadOpenOcdInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid green;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """)      
+        updateInputBorder(uploadOpenOcdInput, src.config.openocdpath)
     def updateBootloaderBorder():
-        path = src.config.bootloaderpath.strip()  # get the current config variable
-        if path == "" or not os.path.isfile(path):
-            uploadBootloaderInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid red;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """)
-        else:
-            uploadBootloaderInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid green;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """)     
+        updateInputBorder(uploadBootloaderInput, src.config.bootloaderpath)
     def updateReceiverBorder():
-        path = src.config.receiverpath.strip()  # get the current config variable
-        if path == "" or not os.path.isfile(path):
-            uploadReceiverInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid red;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """)
-        else:
-            uploadReceiverInput.setStyleSheet("""
-                QLineEdit {
-                    border: 1px solid green;
-                    border-radius: 4px;
-                    padding: 4px;
-                }
-            """) 
-
+        updateInputBorder(uploadReceiverInput, src.config.receiverpath)
 
     #Step 1 Upload variables
     uploadOpenOcdButton = QPushButton("Browse")
@@ -130,6 +90,7 @@ def step1(layout):
         receiverpath = uploadReceiverInput.text()
         print(f"Updated receiver.hex path to {src.config.bootloaderpath}")
         updateReceiverBorder()
+
     uploadOpenOcdInput.textChanged.connect(uploadOpenOcdInput_changed)
     uploadBootloaderInput.textChanged.connect(uploadBootloaderInput_changed)
     uploadReceiverInput.textChanged.connect(uploadReceiverInput_changed)
@@ -141,25 +102,43 @@ def step1(layout):
     updateBootloaderBorder()
     updateReceiverBorder()
 
-    step1title= QLabel("Step 1: Gather Required Files")
+    #H1 Title Step 1
+    step1title= QLabel("Step 1: Pre-Flashing Setup")
     step1title.setStyleSheet("font-size:20px; font-weight:bold;")
     layout.addWidget(step1title)
+    layout.addSpacing(10)
 
+    #H2 OpenOCD Upload
+    openocdtitle = QLabel("OpenOCD Path (Included by default)")
+    openocdtitle.setStyleSheet("font-size:15px; font-weight:bold; ")
+    layout.addWidget(openocdtitle)
     layout.addWidget(uploadOpenOcdInput)
     layout.addWidget(uploadOpenOcdButton)
 
+    #H3 Probe Type
+    probetitle = QLabel("Probe Type")
+    probetitle.setStyleSheet("font-size:13px; font-weight:bold; ")
+    layout.addWidget(probetitle)
     layout.addWidget(probeTypeDropdown)
     layout.addSpacing(40)
 
+    #H2 Bootloader Title
+    bootloadertitle = QLabel("Bootloader Hex Path")
+    bootloadertitle.setStyleSheet("font-size:15px; font-weight:bold; ")
+    layout.addWidget(bootloadertitle)
     layout.addWidget(bootloaderlink)
     layout.addWidget(uploadBootloaderInput)
     layout.addWidget(uploadBootloaderButton)
 
+    #H2 Receiver Title
+    receivertitle = QLabel("Receiver Hex Path")
+    receivertitle.setStyleSheet("font-size:15px; font-weight:bold;")
+    layout.addWidget(receivertitle)
     layout.addWidget(receiverlink)
     layout.addWidget(uploadReceiverInput)
     layout.addWidget(uploadReceiverButton)
 
-    layout.addSpacing(40)
+    layout.addSpacing(20)
 
     layout.addWidget(nextButton)
 
