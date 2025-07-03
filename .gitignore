@@ -4,3 +4,4 @@
 /src/__pycache__
 openocd/
 *.code-workspace
+__pycache__/main.cpython-313.pyc

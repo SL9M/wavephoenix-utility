@@ -12,5 +12,6 @@ app.setWindowIcon(QIcon(icon_path)) # Set App icon
 step1(layout)
 
 window.setLayout(layout)
+window.setFixedWidth(400)
 window.show()
 app.exec()

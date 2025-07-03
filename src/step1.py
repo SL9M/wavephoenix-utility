@@ -6,7 +6,6 @@ import src.config
 import os
 
 def step1(layout):
-
     #Next step button logic
     nextButton = QPushButton("Next Step")
     #nextButton.setEnabled(False)
@@ -120,7 +119,7 @@ def step1(layout):
     probetitle.setStyleSheet("font-size:13px; font-weight:bold; ")
     layout.addWidget(probetitle)
     layout.addWidget(probeTypeDropdown)
-    layout.addSpacing(40)
+    layout.addSpacing(20)
 
     #H2 Bootloader Title
     bootloadertitle = QLabel("Bootloader Hex Path")

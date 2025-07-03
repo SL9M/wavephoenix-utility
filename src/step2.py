@@ -4,7 +4,6 @@ import subprocess
 from src.step3 import step3
 
 def step2(layout):
-
     # Step 2 variables
     step2title= QLabel("Step 2: Erase Device")
     step2title.setStyleSheet("font-size:20px; font-weight:bold;")
