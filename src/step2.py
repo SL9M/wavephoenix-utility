@@ -7,7 +7,7 @@ def step2(layout):
     # Step 2 variables
     step2title= QLabel("Step 2: Erase Device")
     step2title.setStyleSheet("font-size:20px; font-weight:bold;")
-    step2instructions = QLabel('Plug in the wavephoenix you would like to flash, then click "Erase"')
+    step2instructions = QLabel('Plug in the WavePhoenix you would like to flash, then click "Erase"')
     eraseButton = QPushButton("Erase Device")
     # Next Button
     nextbootloaderButton = QPushButton("Next Step")

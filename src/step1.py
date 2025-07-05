@@ -38,7 +38,6 @@ def step1(layout):
         selected, _ = QFileDialog.getOpenFileName(None, "Open Hex File", "", "Hex Files (*.hex);;All Files (*)")
         if selected:
             src.config.receiverpath = selected
-            print(f"Updated firmware path: {src.config.receiverpath}")
             uploadReceiverInput.setText(src.config.receiverpath)
 
 
@@ -87,11 +86,11 @@ def step1(layout):
         updateOpenocdBorder()
     def uploadBootloaderInput_changed():
         src.config.bootloaderpath = uploadBootloaderInput.text()
-        print(f"Updated bootloader.hex path to {src.config.bootloaderpath}")
+        print(f"Updated bootloader path to {src.config.bootloaderpath}")
         updateBootloaderBorder()
     def uploadReceiverInput_changed():
-        global receiverpath
-        receiverpath = uploadReceiverInput.text()
+        src.config.receiverpathpath = uploadReceiverInput.text()
+        print(f"Updated firmware path to {src.config.receiverpath}")
         updateReceiverBorder()
 
     uploadOpenOcdInput.textChanged.connect(uploadOpenOcdInput_changed)
