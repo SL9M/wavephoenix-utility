@@ -5,11 +5,11 @@ set -e
 
 # Update package info
 echo "Updating package repos"
-sudo dnf update -y
+dnf update -y
 
 # Install required packages
 echo "Installing Python 3.13, pip, and Git"
-sudo dnf install -y python3.13 python3.13-pip git
+dnf install -y python3.13 python3.13-pip git
 
 # Use pip to install PyQt6 and PyInstaller
 echo "Installing Python packages..."
