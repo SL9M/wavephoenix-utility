@@ -16,7 +16,7 @@ def step2(layout, window):
 
     eraseButton = QPushButton("Erase Device")
     # Next Button
-    nextbootloaderButton = QPushButton("Next Step")
+    nextbootloaderButton = QPushButton("Next Step >")
 
     def erase_device():
         try:
@@ -36,11 +36,13 @@ def step2(layout, window):
     layout.addWidget(step2title)
     layout.addWidget(step2instructions)
     layout.addWidget (eraseButton)
+    eraseButton.setFixedHeight(35)
     eraseButton.clicked.connect(erase_device)
 
     layout.addSpacing(40)    
 
     layout.addWidget(nextbootloaderButton)
+    nextbootloaderButton.setFixedHeight(35)
 
     window.setFixedWidth(300)
     window.setMinimumHeight(300)

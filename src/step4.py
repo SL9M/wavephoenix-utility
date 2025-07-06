@@ -7,7 +7,7 @@ def step4(window,layout):
     # Step 4 variables
     step4title= QLabel("Step 4: Flash Firmware")
     step4title.setStyleSheet("font-size:20px; font-weight:bold;")
-    step4instructions = QLabel('This is the last step. Click "Flash Firmware" then you should be able to pair a controller by pressing X+Y.')
+    step4instructions = QLabel('This is the last step. Click "Flash Firmware" then your WavePhoenix will be ready to go!')
     step4instructions.setWordWrap(True)
     step4instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     
@@ -36,6 +36,7 @@ def step4(window,layout):
     layout.addWidget(step4title)
     layout.addWidget(step4instructions)
     layout.addWidget (firmwareButton)
+    firmwareButton.setFixedHeight(35)
     firmwareButton.clicked.connect(flash_firmware)
     layout.addSpacing(40)
 
@@ -50,4 +51,5 @@ def step4(window,layout):
         
         step1(window,layout)
     layout.addWidget(backGatherButton)
+    backGatherButton.setFixedHeight(35)
     backGatherButton.clicked.connect(go_to_step1)

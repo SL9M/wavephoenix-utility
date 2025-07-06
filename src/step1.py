@@ -9,8 +9,8 @@ from PyQt6.QtCore import QSize
 def step1(window, layout):
 
     #Next step button logic
-    nextButton = QPushButton("Next Step")
-    nextButton.setFixedHeight(50)
+    nextButton = QPushButton("Next Step >")
+    nextButton.setFixedHeight(35)
     nextButton.setStyleSheet("font-size: 15px;")
     #nextButton.setEnabled(False)
 

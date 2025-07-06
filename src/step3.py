@@ -14,7 +14,7 @@ def step3(window, layout):
     
     bootloaderButton = QPushButton("Flash Bootloader")
     # Next Button
-    nextfirmwareButton = QPushButton("Next Step")
+    nextfirmwareButton = QPushButton("Next Step >")
 
     def flash_bootloader():
         try:
@@ -35,6 +35,7 @@ def step3(window, layout):
     layout.addWidget(step3title)
     layout.addWidget(step3instructions)
     layout.addWidget (bootloaderButton)
+    bootloaderButton.setFixedHeight(35)
     bootloaderButton.clicked.connect(flash_bootloader)
     layout.addSpacing(40)
 
@@ -47,4 +48,5 @@ def step3(window, layout):
         
         step4(window,layout)
     layout.addWidget(nextfirmwareButton)
+    nextfirmwareButton.setFixedHeight(35)
     nextfirmwareButton.clicked.connect(go_to_step4)
