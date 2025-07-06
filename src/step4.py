@@ -1,13 +1,17 @@
-from PyQt6.QtWidgets import  QLabel, QPushButton
+from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
 
-def step4(layout):
+def step4(window,layout):
 
     # Step 4 variables
     step4title= QLabel("Step 4: Flash Firmware")
     step4title.setStyleSheet("font-size:20px; font-weight:bold;")
     step4instructions = QLabel('This is the last step. Click "Flash Firmware" then you should be able to pair a controller by pressing X+Y.')
+    step4instructions.setWordWrap(True)
+    step4instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+    
+
     firmwareButton = QPushButton("Flash Firmware")
     #Back button
     backGatherButton = QPushButton("Flash Another")
@@ -44,6 +48,6 @@ def step4(layout):
             if clearEach.widget():
                 clearEach.widget().deleteLater()
         
-        step1(layout)
+        step1(window,layout)
     layout.addWidget(backGatherButton)
     backGatherButton.clicked.connect(go_to_step1)

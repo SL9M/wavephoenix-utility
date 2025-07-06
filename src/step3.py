@@ -1,14 +1,17 @@
-from PyQt6.QtWidgets import  QLabel, QPushButton
+from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
 from src.step4 import step4
 
-def step3(layout):
+def step3(window, layout):
 
     # Step 3 variables
     step3title= QLabel("Step 3: Flash Bootloader")
     step3title.setStyleSheet("font-size:20px; font-weight:bold;")
     step3instructions = QLabel('Unplug and plug back in your WavePhoenix, then click "Flash Bootloader"')
+    step3instructions.setWordWrap(True)
+    step3instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+    
     bootloaderButton = QPushButton("Flash Bootloader")
     # Next Button
     nextfirmwareButton = QPushButton("Next Step")
@@ -42,6 +45,6 @@ def step3(layout):
             if clearEach.widget():
                 clearEach.widget().deleteLater()
         
-        step4(layout)
+        step4(window,layout)
     layout.addWidget(nextfirmwareButton)
     nextfirmwareButton.clicked.connect(go_to_step4)

@@ -20,4 +20,6 @@ def mainWindow():
     layout = QVBoxLayout()
     layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
+    window.setLayout(layout)
+
     return window, layout, icon_path

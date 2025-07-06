@@ -1,11 +1,13 @@
-from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox
+from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox, QSizePolicy
 from src.config import openocdpath, bootloaderpath, receiverpath
 import src.config
 from src.step2 import step2
 import src.config
 import os
+from PyQt6.QtCore import QSize
 
-def step1(layout):
+def step1(window, layout):
+
     #Next step button logic
     nextButton = QPushButton("Next Step")
     nextButton.setFixedHeight(50)
@@ -144,12 +146,24 @@ def step1(layout):
 
     layout.addWidget(nextButton)
 
+
+    #Correct Size
+    window.setMinimumSize(QSize(0, 0))
+    window.setFixedWidth(400)
+    window.setMinimumHeight(0)
+    window.setMaximumHeight(10000)
+    window.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
+    layout.invalidate()
+    layout.activate()
+    window.adjustSize()
+    window.repaint()
+
+
     # Proceed to step2 if button is pressed
     def go_to_step2():
         while layout.count():
             clearEach = layout.takeAt(0)
             if clearEach.widget():
                 clearEach.widget().deleteLater()
-        
-        step2(layout)
+        step2(layout, window)
     nextButton.clicked.connect(go_to_step2)

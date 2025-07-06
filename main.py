@@ -9,9 +9,7 @@ window, layout, icon_path = mainWindow()
 app.setWindowIcon(QIcon(icon_path)) # Set App icon
 
 # Start flashing process
-step1(layout)
+step1(window, layout)
 
-window.setLayout(layout)
-window.setFixedWidth(400)
 window.show()
 app.exec()
