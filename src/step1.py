@@ -21,7 +21,7 @@ def step1(window, layout):
 
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
-    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico, Default)", "ST-Link"])
+    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico, Default)"])
 
     #Download variables
     bootloaderlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">Download</a>')
