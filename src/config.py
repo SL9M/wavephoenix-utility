@@ -29,7 +29,7 @@ logOutput = None
 
 def getLogOutput():
     global logOutput
-    if logOutput is None or sip.isdeleted(logOutput):
+    if logOutput is None:
         logOutput = QTextEdit()
         logOutput.setPlainText("")
         logOutput.setReadOnly(True)
@@ -47,7 +47,9 @@ def clearLayout(layout):
         elif item.layout():
             clearLayout(item.layout())
 
-class EraseWorker(QThread):
+
+#OpenOCD thread worker
+class OCDWorker(QThread):
     finished_signal = pyqtSignal(str)
     error_signal = pyqtSignal(str)
 
@@ -61,3 +63,22 @@ class EraseWorker(QThread):
             self.finished_signal.emit(result.stdout)
         except subprocess.CalledProcessError as e:
             self.error_signal.emit(e.stderr)
+def createOCDworker(ocdCommand, OCDSuccessMessage, OCDErrorMessage, window=None):
+    worker = OCDWorker(ocdCommand)
+
+    def on_success(output):
+        getLogOutput().append(OCDSuccessMessage + '<p>' + output.replace('\n', '<br>') + '</p>')
+
+    def on_error(err):
+        getLogOutput().append(OCDErrorMessage + '<p>' + err.replace('\n', '<br>') + '</p>')
+    def on_finish():
+        if window:
+            window.worker = None
+            window.raise_()
+            window.activateWindow()
+    worker.finished_signal.connect(on_success)
+    worker.error_signal.connect(on_error)
+    worker.finished.connect(on_finish)
+    if window:
+        window.worker = worker
+    worker.start()

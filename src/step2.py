@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy, QApplication
 import src.config
 from src.step3 import step3
-from src.config import clearLayout, getLogOutput, EraseWorker
+from src.config import clearLayout, getLogOutput, createOCDworker
 
 def step2(layout, window):
 
@@ -17,25 +17,16 @@ def step2(layout, window):
     # Next Button
     nextbootloaderButton = QPushButton("Next Step >")
 
-    def erase_device():
-        eraseCommand = [
+    def runOCDcommand():
+        ocdCommand = [
             src.config.openocdpath,
             "-f", "interface\\cmsis-dap.cfg",
             "-f", "target\\efm32s2.cfg",
             "-c", "init; efm32s2_dci_device_erase; shutdown"
         ]
-        worker = EraseWorker(eraseCommand)
-        def on_success(output):
-            logOutput.append("Erase success\n" + output)
-        def on_error(err):
-            logOutput.append("Erase error\n" + err)
-        def on_finish():
-            window.worker = None
-        worker.finished_signal.connect(on_success)
-        worker.error_signal.connect(on_error)
-        worker.finished.connect(on_finish)
-        window.worker = worker
-        worker.start()
+        OCDErrorMessage = ('<p style="color:red; font-size:20px;"><b>Erase error</b></p><p>Make sure you device is plugged in. If your device already has a firmware then you need to put it in bootloader mode by hold the pairing button for 3 seconds.</p>')
+        OCDSuccessMessage = ('<p style="color:#007aff; font-size:20px;"><b>Erase success!</b></p><p>Unplug your probe from USB and proceed to next step.</p>')
+        createOCDworker(ocdCommand, OCDSuccessMessage, OCDErrorMessage, window)
        
 
     # Create layout
@@ -46,7 +37,7 @@ def step2(layout, window):
 
     layout.addWidget (eraseButton)
     eraseButton.setFixedHeight(35)
-    eraseButton.clicked.connect(erase_device)
+    eraseButton.clicked.connect(runOCDcommand)
 
     layout.addSpacing(40)    
 
@@ -54,7 +45,6 @@ def step2(layout, window):
     nextbootloaderButton.setFixedHeight(35)
 
     window.setMinimumWidth(500)
-    #window.setMinimumHeight(350)
     window.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)    
     layout.invalidate()
     layout.activate()

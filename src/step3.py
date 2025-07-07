@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
-import subprocess
 from src.step4 import step4
-from src.config import clearLayout, getLogOutput
+from src.config import clearLayout, getLogOutput, createOCDworker
 
 def step3(window, layout):
 
@@ -11,7 +10,7 @@ def step3(window, layout):
     # Step 3 variables
     step3title= QLabel("Step 3: Flash Bootloader")
     step3title.setStyleSheet("font-size:20px; font-weight:bold;")
-    step3instructions = QLabel('Unplug and plug back in your WavePhoenix, then click "Flash Bootloader"')
+    step3instructions = QLabel('Plug back in your WavePhoenix, then click "Flash Bootloader"')
     step3instructions.setWordWrap(True)
     step3instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     
@@ -19,20 +18,17 @@ def step3(window, layout):
     # Next Button
     nextfirmwareButton = QPushButton("Next Step >")
 
-    def flash_bootloader():
-        try:
-            bootloaderCommand = [
-                src.config.openocdpath,
-                "-f", "interface\\cmsis-dap.cfg",
-                "-c", "transport select swd",
-                "-f", "target\\efm32s2.cfg",
-                "-c", f'init; halt; flash write_image erase "{src.config.bootloaderpath}"; exit'
-            ]
-            print(bootloaderCommand)
-            bootloaderResult = subprocess.run(bootloaderCommand, capture_output=True, text=True, check=True)
-            print("Flash bootloader success\n",bootloaderResult.stdout)
-        except subprocess.CalledProcessError as bootloaderError:
-            print("Flash bootloader error\n", bootloaderError.stderr)
+    def runOCDcommand():
+        ocdCommand = [
+            src.config.openocdpath,
+            "-f", "interface\\cmsis-dap.cfg",
+            "-c", "transport select swd",
+            "-f", "target\\efm32s2.cfg",
+            "-c", f'init; halt; flash write_image erase "{src.config.bootloaderpath}"; exit'
+        ]
+        OCDErrorMessage = ('<p style="color:red; font-size:20px;"><b>Bootloader flash error</b></p><p>Did you power cycle your probe before flashing? Also check your USB connection, and file paths.</p>')
+        OCDSuccessMessage = ('<p style="color:#007aff; font-size:20px;"><b>Successful bootloader flash!</b></p><p>You can proceed to the next step.</p>')
+        createOCDworker(ocdCommand, OCDSuccessMessage, OCDErrorMessage, window)
 
     # Create layout
     layout.addWidget(step3title)
@@ -42,7 +38,7 @@ def step3(window, layout):
     
     layout.addWidget (bootloaderButton)
     bootloaderButton.setFixedHeight(35)
-    bootloaderButton.clicked.connect(flash_bootloader)
+    bootloaderButton.clicked.connect(runOCDcommand)
     layout.addSpacing(40)
 
     # Proceed to step4 if button is pressed

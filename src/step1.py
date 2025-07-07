@@ -12,7 +12,7 @@ def step1(window, layout):
     nextButton = QPushButton("Next Step >")
     nextButton.setStyleSheet("""
         QPushButton {
-            background-color: #007aff;  /* iOS/macOS blue */
+            background-color: #007aff;
             color: white;
         }
         QPushButton:hover {
