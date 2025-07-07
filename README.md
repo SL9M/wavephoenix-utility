@@ -4,15 +4,15 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 
 ![Step 1 Screenshot](/resources/step1screenshot.png "Step 1 Screenshot")
 
-
 ## Usage
 1. Download [latest release](https://github.com/SL9M/wavephoenix-utility/releases/latest)
- from Github releases page. - Chrome may flag it as suspicious, this is expected behavior due to the way it's packaging and executing command line tools. 
-2. Extract all contents in the zip file
-3. Launch the executable
-4. Accept any SmartScreen/Security prompts
-5. Upload your bootloader and firmware files to the GUI
-6. Follow the step by step guide and enjoy!
+ from Github releases page. - Chrome may flag it as suspicious, this is expected behavior due to the way it's packaging and executing command line tools.
+2. Download [bootloader and receiver hex files](https://github.com/loopj/wavephoenix/releases/latest) from loopj 
+3. Extract all contents in the zip file
+4. Launch the executable
+5. Accept SmartScreen/Security prompts
+6. Upload your bootloader and firmware files to the GUI
+7. Follow the step by step guide and enjoy!
 
 ## Current Features
 1. Erase & flash WavePhoenix devices easily
@@ -20,10 +20,11 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 3. Github release bundles include Loopj's OpenOCD fork - no extra software needed!
 4. Step by step on screen guide
 5. Seperate window with logs & console output for debugging and transparency
+6. Support for macOS - Beta 
 
 ## Planned Features
-1. "Pro" layout - for bulk flashing & time savings
-3. Support for macOS and Linux 
+1. "Pro" layout - all features in one window. Ideal for creating batches
+2. Support for Linux 
 4. Robust error handling with troubleshooting steps included
 5. Support more probes
 
