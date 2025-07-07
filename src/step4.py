@@ -14,7 +14,7 @@ def step4(window,layout):
 
     firmwareButton = QPushButton("Flash Firmware")
     #Back button
-    backGatherButton = QPushButton("Flash Another")
+    backGatherButton = QPushButton("Back Home")
 
 
     def flash_firmware():

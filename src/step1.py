@@ -11,7 +11,12 @@ def step1(window, layout):
     #Next step button logic
     nextButton = QPushButton("Next Step >")
     nextButton.setFixedHeight(35)
-    nextButton.setStyleSheet("font-size: 15px;")
+
+    #Test device logic
+    testButton = QPushButton("Test Device")
+    testButton.setFixedHeight(35)
+
+
     #nextButton.setEnabled(False)
 
     # Probe type dropdown variables
@@ -145,9 +150,10 @@ def step1(window, layout):
     layout.addSpacing(20)
 
     layout.addWidget(nextButton)
+    layout.addWidget(testButton)
 
 
-    #Correct Size
+    #Adjust Size
     window.setMinimumSize(QSize(0, 0))
     window.setFixedWidth(400)
     window.setMinimumHeight(0)
@@ -167,3 +173,12 @@ def step1(window, layout):
                 clearEach.widget().deleteLater()
         step2(layout, window)
     nextButton.clicked.connect(go_to_step2)
+
+    def go_to_testdevice():
+        from src.test import testPhoenix
+        while layout.count():
+            clearEach = layout.takeAt(0)
+            if clearEach.widget():
+                clearEach.widget().deleteLater()
+        testPhoenix(window, layout)
+    testButton.clicked.connect(go_to_testdevice)
