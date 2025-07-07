@@ -2,9 +2,11 @@ from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
 from src.step4 import step4
-from src.config import clearLayout
+from src.config import clearLayout, getLogOutput
 
 def step3(window, layout):
+
+    logOutput=getLogOutput()
 
     # Step 3 variables
     step3title= QLabel("Step 3: Flash Bootloader")
@@ -35,6 +37,9 @@ def step3(window, layout):
     # Create layout
     layout.addWidget(step3title)
     layout.addWidget(step3instructions)
+
+    layout.addWidget(logOutput)
+    
     layout.addWidget (bootloaderButton)
     bootloaderButton.setFixedHeight(35)
     bootloaderButton.clicked.connect(flash_bootloader)

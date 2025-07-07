@@ -1,13 +1,11 @@
-from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
+from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy, QApplication
 import src.config
-import subprocess
 from src.step3 import step3
-from src.config import clearLayout
-
-
+from src.config import clearLayout, getLogOutput, EraseWorker
 
 def step2(layout, window):
 
+    logOutput=getLogOutput()
     # Step 2 variables
     step2title= QLabel("Step 2: Erase Device")
     step2title.setStyleSheet("font-size:20px; font-weight:bold;")
@@ -20,22 +18,32 @@ def step2(layout, window):
     nextbootloaderButton = QPushButton("Next Step >")
 
     def erase_device():
-        try:
-            eraseCommand = [
-                src.config.openocdpath,
-                "-f", "interface\\cmsis-dap.cfg",
-                "-f", "target\\efm32s2.cfg",
-                "-c", "init; efm32s2_dci_device_erase; shutdown"
-            ]
-            print(eraseCommand)
-            eraseResult = subprocess.run(eraseCommand, capture_output=True, text=True, check=True)
-            print("Erase success\n",eraseResult.stdout)
-        except subprocess.CalledProcessError as eraseError:
-            print("Erase error\n", eraseError.stderr)
+        eraseCommand = [
+            src.config.openocdpath,
+            "-f", "interface\\cmsis-dap.cfg",
+            "-f", "target\\efm32s2.cfg",
+            "-c", "init; efm32s2_dci_device_erase; shutdown"
+        ]
+        worker = EraseWorker(eraseCommand)
+        def on_success(output):
+            logOutput.append("Erase success\n" + output)
+        def on_error(err):
+            logOutput.append("Erase error\n" + err)
+        def on_finish():
+            window.worker = None
+        worker.finished_signal.connect(on_success)
+        worker.error_signal.connect(on_error)
+        worker.finished.connect(on_finish)
+        window.worker = worker
+        worker.start()
+       
 
     # Create layout
     layout.addWidget(step2title)
     layout.addWidget(step2instructions)
+
+    layout.addWidget(logOutput)
+
     layout.addWidget (eraseButton)
     eraseButton.setFixedHeight(35)
     eraseButton.clicked.connect(erase_device)
@@ -45,8 +53,8 @@ def step2(layout, window):
     layout.addWidget(nextbootloaderButton)
     nextbootloaderButton.setFixedHeight(35)
 
-    window.setFixedWidth(300)
-    window.setMinimumHeight(300)
+    window.setMinimumWidth(500)
+    #window.setMinimumHeight(350)
     window.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)    
     layout.invalidate()
     layout.activate()
