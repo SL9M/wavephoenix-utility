@@ -22,3 +22,11 @@ else:
 
 bootloaderpath = ""
 receiverpath = ""
+
+def clearLayout(layout):
+    while layout.count():
+        item = layout.takeAt(0)
+        if item.widget():
+            item.widget().deleteLater()
+        elif item.layout():
+            clearLayout(item.layout())

@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
 from src.step3 import step3
+from src.config import clearLayout
 
 
 
@@ -54,10 +55,6 @@ def step2(layout, window):
 
     # Proceed to step3 if button is pressed
     def go_to_step3():
-        while layout.count():
-            clearEach = layout.takeAt(0)
-            if clearEach.widget():
-                clearEach.widget().deleteLater()
-        
-        step3(window ,layout)
+        clearLayout(layout)
+        step3(window,layout)
     nextbootloaderButton.clicked.connect(go_to_step3)

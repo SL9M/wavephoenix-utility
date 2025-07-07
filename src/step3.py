@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
 from src.step4 import step4
+from src.config import clearLayout
 
 def step3(window, layout):
 
@@ -41,11 +42,7 @@ def step3(window, layout):
 
     # Proceed to step4 if button is pressed
     def go_to_step4():
-        while layout.count():
-            clearEach = layout.takeAt(0)
-            if clearEach.widget():
-                clearEach.widget().deleteLater()
-        
+        clearLayout(layout)        
         step4(window,layout)
     layout.addWidget(nextfirmwareButton)
     nextfirmwareButton.setFixedHeight(35)

@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox, QSizePolicy
-from src.config import openocdpath, bootloaderpath, receiverpath
+from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout
+from src.config import openocdpath, bootloaderpath, receiverpath, clearLayout
 import src.config
 from src.step2 import step2
 import src.config
@@ -10,6 +10,18 @@ def step1(window, layout):
 
     #Next step button logic
     nextButton = QPushButton("Next Step >")
+    nextButton.setStyleSheet("""
+        QPushButton {
+            background-color: #007aff;  /* iOS/macOS blue */
+            color: white;
+        }
+        QPushButton:hover {
+            background-color: #005bb5;
+        }
+        QPushButton:pressed {
+            background-color: #003e85;
+        }
+    """)
     nextButton.setFixedHeight(35)
 
     #Test device logic
@@ -23,11 +35,6 @@ def step1(window, layout):
     probeTypeDropdown = QComboBox()
     probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico, Default)"])
 
-    #Download variables
-    bootloaderlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">Download</a>')
-    receiverlink = QLabel('<a href="https://github.com/loopj/wavephoenix/releases">Download')
-    bootloaderlink.setOpenExternalLinks(True)
-    receiverlink.setOpenExternalLinks(True)
 
     #Upload Dialogs and path storage
     def file_dialog_openocd():
@@ -131,21 +138,29 @@ def step1(window, layout):
     layout.addWidget(probeTypeDropdown)
     layout.addSpacing(20)
 
-    #H2 Bootloader Title
-    bootloadertitle = QLabel("Bootloader Hex Path")
+    #Left columns bootloader hex
+    bootloaderhexLayout = QVBoxLayout()
+    bootloadertitle = QLabel('Bootloader Hex Path - <a href="https://github.com/loopj/wavephoenix/releases">Download</a>')
     bootloadertitle.setStyleSheet("font-size:15px; font-weight:bold; ")
-    layout.addWidget(bootloadertitle)
-    layout.addWidget(bootloaderlink)
-    layout.addWidget(uploadBootloaderInput)
-    layout.addWidget(uploadBootloaderButton)
+    bootloadertitle.setOpenExternalLinks(True)
+    bootloaderhexLayout.addWidget(bootloadertitle)
+    bootloaderhexLayout.addWidget(uploadBootloaderInput)
+    bootloaderhexLayout.addWidget(uploadBootloaderButton)
 
-    #H2 Receiver Title
-    receivertitle = QLabel("Receiver Hex Path")
+    #Right columns Receiver hex
+    receiverhexLayout = QVBoxLayout()
+    receivertitle = QLabel('Receiver Hex Path - <a href="https://github.com/loopj/wavephoenix/releases">Download</a>')
     receivertitle.setStyleSheet("font-size:15px; font-weight:bold;")
-    layout.addWidget(receivertitle)
-    layout.addWidget(receiverlink)
-    layout.addWidget(uploadReceiverInput)
-    layout.addWidget(uploadReceiverButton)
+    receivertitle.setOpenExternalLinks(True)
+    receiverhexLayout.addWidget(receivertitle)
+    receiverhexLayout.addWidget(uploadReceiverInput)
+    receiverhexLayout.addWidget(uploadReceiverButton)
+    hexColumnsLayout = QHBoxLayout()
+
+    #Add to row
+    hexColumnsLayout.addLayout(bootloaderhexLayout)
+    hexColumnsLayout.addLayout(receiverhexLayout)
+    layout.addLayout(hexColumnsLayout)
 
     layout.addSpacing(20)
 
@@ -155,7 +170,7 @@ def step1(window, layout):
 
     #Adjust Size
     window.setMinimumSize(QSize(0, 0))
-    window.setFixedWidth(400)
+    window.setFixedWidth(520)
     window.setMinimumHeight(0)
     window.setMaximumHeight(10000)
     window.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
@@ -167,18 +182,12 @@ def step1(window, layout):
 
     # Proceed to step2 if button is pressed
     def go_to_step2():
-        while layout.count():
-            clearEach = layout.takeAt(0)
-            if clearEach.widget():
-                clearEach.widget().deleteLater()
+        clearLayout(layout)
         step2(layout, window)
     nextButton.clicked.connect(go_to_step2)
 
     def go_to_testdevice():
         from src.test import testPhoenix
-        while layout.count():
-            clearEach = layout.takeAt(0)
-            if clearEach.widget():
-                clearEach.widget().deleteLater()
+        clearLayout(layout)
         testPhoenix(window, layout)
     testButton.clicked.connect(go_to_testdevice)

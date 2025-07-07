@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import subprocess
+from src.config import clearLayout
 
 def step4(window,layout):
 
@@ -44,11 +45,7 @@ def step4(window,layout):
     # Back to step1 if button is pressed
     def go_to_step1():
         from src.step1 import step1
-        while layout.count():
-            clearEach = layout.takeAt(0)
-            if clearEach.widget():
-                clearEach.widget().deleteLater()
-        
+        clearLayout(layout)
         step1(window,layout)
     layout.addWidget(backGatherButton)
     backGatherButton.setFixedHeight(35)
