@@ -15,10 +15,10 @@ else:  # Python script
 system = platform.system()
 #Linux
 if system == "Linux":
-    openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd.exe")
+    openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd")
 #macOS
 elif system == "Darwin":
-    openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd.exe")
+    openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd")
 #Windows
 else:  
     openocdpath = os.path.join(base_dir, "openocd", "bin", "openocd.exe")
