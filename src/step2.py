@@ -24,8 +24,8 @@ def step2(layout, window):
             "-f", "target\\efm32s2.cfg",
             "-c", "init; efm32s2_dci_device_erase; shutdown"
         ]
-        OCDErrorMessage = ('<p style="color:red; font-size:20px;"><b>Erase error</b></p><p>Make sure you device is plugged in. If your device already has a firmware then you need to put it in bootloader mode by hold the pairing button for 3 seconds.</p>')
-        OCDSuccessMessage = ('<p style="color:#007aff; font-size:20px;"><b>Erase success!</b></p><p>Unplug your probe from USB and proceed to next step.</p>')
+        OCDErrorMessage = ('<p style="font-size:20px;"><b>Erase error</b></p><p><b>Make sure you device is plugged in. If your device already has a firmware then you need to put it in bootloader mode by hold the pairing button for 3 seconds.</b></p>')
+        OCDSuccessMessage = ('<p style="font-size:20px;"><b>Erase success!</b></p><p><b>Unplug your probe from USB and proceed to next step.</b></p>')
         createOCDworker(ocdCommand, OCDSuccessMessage, OCDErrorMessage, window)
        
 
