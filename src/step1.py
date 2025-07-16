@@ -122,7 +122,7 @@ def step1(window, layout):
     updateReceiverBorder()
 
     #H1 Title Step 1
-    step1title= QLabel("Step 1: Pre-Flashing Setup")
+    step1title= QLabel("WavePhoenix Flashing Setup")
     step1title.setStyleSheet("font-size:20px; font-weight:bold;")
     layout.addWidget(step1title)
     layout.addSpacing(10)
