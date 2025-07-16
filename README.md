@@ -17,20 +17,19 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 ## Current Features
 1. Erase & flash WavePhoenix devices easily
 2. Links user to bootloader & firmware downloads
-3. Github release bundles include Loopj's OpenOCD fork - no extra software needed!
+3. Github release bundles include OpenOCD with efm32s2 support - no extra software needed!
 4. Step by step on screen guide
 5. Seperate window with logs & console output for debugging and transparency
-6. Support for macOS - Beta 
+6. Support for macOS & Linux
+7. Robust error handling with troubleshooting steps included
 
 ## Planned Features
 1. "Pro" layout - all features in one window. Ideal for creating batches
-2. Support for Linux 
-4. Robust error handling with troubleshooting steps included
-5. Support more probes
+5. Support for J-Link, and ST-Link
 
 ## Credits
-Credit largely goes to loopj for creating the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
+Credit largely goes to loopj for the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
 
-Special thanks to members of the GameCube modding community for inspiring me to solve this issue.
+Special thanks to members of the GameCube modding community for inspiring me to make this.
 
 Built with Python & Qt6, packaged using PyInstaller.
