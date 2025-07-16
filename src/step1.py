@@ -86,10 +86,13 @@ def step1(window, layout):
     uploadReceiverButton.clicked.connect(file_dialog_receiver)
     # Input fields
     uploadOpenOcdInput = QLineEdit()
+    uploadOpenOcdInput.setReadOnly(True)
     uploadOpenOcdInput.setText(src.config.openocdpath)
     uploadBootloaderInput = QLineEdit()
+    uploadBootloaderInput.setReadOnly(True)
     uploadBootloaderInput.setText(src.config.bootloaderpath)
     uploadReceiverInput = QLineEdit()
+    uploadReceiverInput.setReadOnly(True)
     uploadReceiverInput.setText(src.config.receiverpath)
 
 

@@ -16,7 +16,7 @@ def testPhoenix(window,layout):
 
     readmemoryButton = QPushButton("Test Device")
     #Back button
-    backGatherButton = QPushButton("Back Home")
+    backGatherButton = QPushButton("Back Home >")
 
 
     def runOCDcommand():
