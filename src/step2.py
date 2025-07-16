@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy, QApplication
 import src.config
+import os
 from src.step3 import step3
 from src.config import clearLayout, getLogOutput, createOCDworker
 
@@ -20,8 +21,8 @@ def step2(layout, window):
     def runOCDcommand():
         ocdCommand = [
             src.config.openocdpath,
-            "-f", "interface\\cmsis-dap.cfg",
-            "-f", "target\\efm32s2.cfg",
+            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
+            "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", "init; efm32s2_dci_device_erase; shutdown"
         ]
         OCDErrorMessage = ('<p style="font-size:20px;"><b>Erase error</b></p><p><b>Make sure you device is plugged in. If your device already has a firmware then you need to put it in bootloader mode by hold the pairing button for 3 seconds.</b></p>')

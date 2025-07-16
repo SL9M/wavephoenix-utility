@@ -116,7 +116,6 @@ def step1(window, layout):
 
 
     # Step 1 Layout
-
     updateOpenocdBorder()
     updateBootloaderBorder()
     updateReceiverBorder()

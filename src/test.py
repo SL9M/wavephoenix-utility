@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
+import os
 import subprocess
 from src.config import createOCDworker, getLogOutput, clearLayout
 
@@ -22,9 +23,9 @@ def testPhoenix(window,layout):
     def runOCDcommand():
         ocdCommand = [
             src.config.openocdpath,
-            "-f", "interface\\cmsis-dap.cfg",
+            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
             "-c", "transport select swd",
-            "-f", "target\\efm32s2.cfg",
+            "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", "init; reset init; exit"
         ]
         OCDErrorMessage = ("<p style='font-size:20px;'><b>Command sent! Try pressing the pair button, if it blinks you're ready to assemble!</b></p>")

@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
+import os
 import time
 from src.config import clearLayout, getLogOutput, createOCDworker
 
@@ -21,18 +22,18 @@ def step3(window, layout):
     def runOCDcommand():
         bootloaderOCDCommand = [
             src.config.openocdpath,
-            "-f", "interface\\cmsis-dap.cfg",
+            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
             "-c", "transport select swd",
-            "-f", "target\\efm32s2.cfg",
+            "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", f'init; halt; flash write_image erase "{src.config.bootloaderpath}"; exit'
         ]
         bootloaderOCDSuccessMessage = ('<p style="font-size:20px;"><b>Successful bootloader flash!</b></p><p>You can proceed to the next step.</p>')
         
         firmwareOCDCommand = [
             src.config.openocdpath,
-            "-f", "interface\\cmsis-dap.cfg",
+            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
             "-c", "transport select swd",
-            "-f", "target\\efm32s2.cfg",
+            "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", f'init; halt; flash write_image erase "{src.config.receiverpath}"; exit'
         ]
         OCDErrorMessage = ('<p style="font-size:20px;"><b>Device flash error</b></p><p>Check your USB connection, and file paths. If that doesn not work, try restarting the process.</p>')
