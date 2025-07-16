@@ -28,8 +28,8 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 5. Support for J-Link, and ST-Link
 
 ## Credits
-Credit largely goes to loopj for the core WavePhoenix project. Without Loopj's hard work, this tool would have no reason to exist.
+Credit largely goes to loopj for the core [WavePhoenix project](https://github.com/loopj/wavephoenix/tree/main/hardware/mini-receiver). Without Loopj's hard work, this tool would have no reason to exist.
 
 Special thanks to members of the GameCube modding community for inspiring me to make this.
 
-Built with Python & Qt6, packaged using PyInstaller.
+Built with Python3, PyQt6, OpenOCD, and bundled using PyInstaller.
