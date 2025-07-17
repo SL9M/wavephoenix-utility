@@ -3,13 +3,20 @@ from PyQt6.QtWidgets import  QWidget, QVBoxLayout
 from PyQt6.QtGui import QIcon
 import sys
 import os
+import platform
 
 def mainWindow():
-    #Handle Icon Path in exe build
-    if getattr(sys, 'frozen', False):  # Check if running in a packaged app (frozen state)
-        icon_path = os.path.join(sys._MEIPASS, 'resources', 'icon.ico')
+    # Determine platform for icon
+    if platform.system() == 'Darwin':
+        icon_filename = 'icon.icns'
     else:
-        icon_path = 'resources/icon.ico'
+        icon_filename = 'icon.ico'
+
+    # Pyscript or PyInstaller check
+    if getattr(sys, 'frozen', False):  # Running from PyInstaller
+        icon_path = os.path.join(sys._MEIPASS, 'resources', icon_filename)
+    else:
+        icon_path = os.path.join('resources', icon_filename)
 
     # Configure Main Window
     window = QWidget()
