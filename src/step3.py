@@ -12,6 +12,7 @@ def step3(window, layout):
     step3title= QLabel("Step 3: Flash Bootloader & Firmware")
     step3title.setStyleSheet("font-size:20px; font-weight:bold;")
     step3instructions = QLabel('Reconnect your WavePhoenix, click "Flash Device," then your device will be ready!')
+    step3instructions.setStyleSheet("padding-bottom:1px;")
     step3instructions.setWordWrap(True)
     step3instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     
@@ -47,11 +48,12 @@ def step3(window, layout):
     layout.addWidget(step3instructions)
 
     layout.addWidget(logOutput)
+    layout.addSpacing(10)
     
     layout.addWidget (bootloaderButton)
     bootloaderButton.setFixedHeight(35)
     bootloaderButton.clicked.connect(runOCDcommand)
-    layout.addSpacing(40)
+    layout.addSpacing(30)
 
     # Go home if button is pressed
     def go_to_step1():
