@@ -12,7 +12,8 @@ fi
 
 BREW_PREFIX="/usr/local"
 ZPROFILE="$HOME/.zprofile"
-echo 'eval "$(/usr/local/bin/brew shellenv)"' >> "$ZPROFILE"
+
+grep -qxF 'eval "$(/usr/local/bin/brew shellenv)"' "$ZPROFILE" || echo 'eval "$(/usr/local/bin/brew shellenv)"' >> "$ZPROFILE"
 eval "$(/usr/local/bin/brew shellenv)"
 
 brew install pyenv
