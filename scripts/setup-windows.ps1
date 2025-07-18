@@ -9,6 +9,9 @@ python -m pip install pyinstaller pyqt6
 
 winget install --id=Git.Git -e --accept-source-agreements --accept-package-agreements
 
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine) + ";" +
+            [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::User)
+
 git clone https://github.com/SL9M/wavephoenix-utility
 
 Set-Location -Path ".\wavephoenix-utility"
@@ -19,7 +22,7 @@ Invoke-WebRequest -Uri $tarUrl -OutFile $tarFile
 
 tar -xjf $tarFile
 
-Rename-Item -Path "openocd-0.12.0-arduino1-static-i686-w64-mingw32" -NewName "openocd"
+Rename-Item -Path "i686-w64-mingw32" -NewName "openocd"
 
 Remove-Item -Path $tarFile
 
