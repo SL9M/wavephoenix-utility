@@ -50,12 +50,12 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='wavephoenix-utility',
+    name='WavePhoenix Utility',
 )
 
 bundle = BUNDLE(
     coll,
-    name='wavephoenix-utility.app',
+    name='WavePhoenix Utility.app',
     icon='resources/icon.icns',
-    bundle_identifier='com.yourdomain.wavephoenixutility',
+    bundle_identifier='com.slime.wavephoenixutility',
 )
