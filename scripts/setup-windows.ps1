@@ -1,17 +1,26 @@
-# Install Python 3.13 via winget
-Write-Host "Installing Python 3.13..."
-winget install --id=Python.Python.3.13 -e
+$ErrorActionPreference = "Stop"
 
-# Verify Python installation
-$python = Get-Command python -ErrorAction SilentlyContinue
-if (-not $python) {
-    Write-Error "Python is not found in PATH after installation. Please ensure Python 3.13 is installed and added to PATH."
-    exit 1
-}
+winget install --id=Python.Python.3.12 -e --accept-source-agreements --accept-package-agreements
 
-# Install pyinstaller and pyqt6 using pip
-Write-Host "Installing pyinstaller and pyqt6 via pip..."
+$env:Path += ";$env:LOCALAPPDATA\Programs\Python\Python312\Scripts;$env:LOCALAPPDATA\Programs\Python\Python312"
+
 python -m pip install --upgrade pip
 python -m pip install pyinstaller pyqt6
 
-Write-Host "Installation completed successfully. Run pyinstaller main.spec in the project root."
+winget install --id=Git.Git -e --accept-source-agreements --accept-package-agreements
+
+git clone https://github.com/SL9M/wavephoenix-utility
+
+Set-Location -Path ".\wavephoenix-utility"
+
+$tarUrl = "https://downloads.arduino.cc/tools/openocd-0.12.0-arduino1-static-i686-w64-mingw32.tar.bz2"
+$tarFile = "openocd-0.12.0-arduino1-static-i686-w64-mingw32.tar.bz2"
+Invoke-WebRequest -Uri $tarUrl -OutFile $tarFile
+
+tar -xjf $tarFile
+
+Rename-Item -Path "openocd-0.12.0-arduino1-static-i686-w64-mingw32" -NewName "openocd"
+
+Remove-Item -Path $tarFile
+
+Write-Host "Setup complete."
