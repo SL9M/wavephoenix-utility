@@ -30,10 +30,13 @@ ZSHRC="$HOME/.zshrc"
   echo 'alias pip=pip3'
 } >> "$ZSHRC"
 
-source "$ZSHRC"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 
-pip install --upgrade pip
-pip install pyinstaller pyqt6
+pip3 install --upgrade pip
+pip3 install pyinstaller pyqt6
 
 brew install git
 
