@@ -1,26 +1,23 @@
 #!/bin/bash
-set -e
-if [ "$EUID" -ne 0 ]; then
-  echo "This script must be run with sudo to access dnf"
+
+if ! sudo -v; then
+  echo "This script requires sudo access for package installation." >&2
   exit 1
 fi
 
-# Install fedora packages
-dnf update -y
-dnf install -y python3.12 python3.12-pip git
+sudo dnf install -y python3.12 git
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
+export PATH="/usr/bin:$PATH"
 
-# Project deps
-python3.12 -m pip install --upgrade pip
-python3.12 -m pip install pyqt6 pyinstaller
+python3.12 --version
+python3.12 -m pip install pyinstaller pyqt6
 
-#Clone repo to desktop
-cd ~/Desktop
 git clone https://github.com/SL9M/wavephoenix-utility
-cd wavephoenix-utility
+cd wavephoenix-utility || exit 1
 
-#Clone and extract openocd
-curl -L https://downloads.arduino.cc/tools/openocd-0.12.0-arduino1-static-x86_64-ubuntu16.04-linux-gnu.tar.bz2 -o openocd.tar.bz2 && \
-tar -xjf openocd.tar.bz2 && \
+wget https://downloads.arduino.cc/tools/openocd-0.12.0-arduino1-static-x86_64-ubuntu16.04-linux-gnu.tar.bz2
+tar -xf openocd-0.12.0-arduino1-static-x86_64-ubuntu16.04-linux-gnu.tar.bz2
 mv x86_64-ubuntu16.04-linux-gnu openocd
+rm openocd-0.12.0-arduino1-static-x86_64-ubuntu16.04-linux-gnu.tar.bz2
 
-echo "Setup complete! Run pyinstaller main.spec to build"
+echo "Success!"
