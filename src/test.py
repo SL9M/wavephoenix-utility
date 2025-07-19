@@ -16,6 +16,18 @@ def testPhoenix(window,layout):
     testphoenixinstructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.MinimumExpanding)
 
     readmemoryButton = QPushButton("Test Device")
+    readmemoryButton.setStyleSheet("""
+        QPushButton {
+            background-color: #007aff;
+            color: white;
+        }
+        QPushButton:hover {
+            background-color: #005bb5;
+        }
+        QPushButton:pressed {
+            background-color: #003e85;
+        }
+    """)
     #Back button
     backGatherButton = QPushButton("Back Home >")
 
