@@ -12,9 +12,8 @@ def testPhoenix(window,layout):
     testphoenixtitle.setStyleSheet("font-size:20px; font-weight:bold;")
     testphoenixinstructions = QLabel('Unplug and plug back in your WavePhoenix. Click "Test Device" sending this command will allow it to function while connected to the probe.')
     testphoenixinstructions.setStyleSheet("padding-bottom:1px;")
-    testphoenixinstructions.setWordWrap(True)
-    testphoenixinstructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-    
+    testphoenixinstructions.setWordWrap(True)    
+    testphoenixinstructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.MinimumExpanding)
 
     readmemoryButton = QPushButton("Test Device")
     #Back button
@@ -46,8 +45,8 @@ def testPhoenix(window,layout):
     readmemoryButton.clicked.connect(runOCDcommand)
     layout.addSpacing(30)
 
-    window.setMinimumWidth(500)
-    window.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)    
+    #window.setMinimumWidth(500)
+    window.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     layout.invalidate()
     layout.activate()
     window.adjustSize()
