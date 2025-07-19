@@ -5,3 +5,6 @@
 openocd/
 *.code-workspace
 __pycache__/main.cpython-313.pyc
+/AppDir
+appimagetool.AppImage
+wavephoenix-utility.AppImage

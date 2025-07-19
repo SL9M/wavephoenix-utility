@@ -5,7 +5,7 @@ if ! sudo -v; then
   exit 1
 fi
 
-sudo dnf install -y python3.12 git
+sudo dnf install -y python3.12 git libatomic
 curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 export PATH="/usr/bin:$PATH"
 
