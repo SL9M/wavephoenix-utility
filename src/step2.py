@@ -15,6 +15,18 @@ def step2(layout, window):
     step2instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
 
     eraseButton = QPushButton("Erase Device")
+    eraseButton.setStyleSheet("""
+        QPushButton {
+            background-color: #007aff;
+            color: white;
+        }
+        QPushButton:hover {
+            background-color: #005bb5;
+        }
+        QPushButton:pressed {
+            background-color: #003e85;
+        }
+    """)
     # Next Button
     nextbootloaderButton = QPushButton("Next Step >")
 
@@ -40,7 +52,7 @@ def step2(layout, window):
     eraseButton.setFixedHeight(35)
     eraseButton.clicked.connect(runOCDcommand)
 
-    layout.addSpacing(40)    
+    layout.addSpacing(20)    
 
     layout.addWidget(nextbootloaderButton)
     nextbootloaderButton.setFixedHeight(35)

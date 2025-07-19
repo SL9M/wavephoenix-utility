@@ -45,7 +45,6 @@ def testPhoenix(window,layout):
     readmemoryButton.clicked.connect(runOCDcommand)
     layout.addSpacing(30)
 
-    #window.setMinimumWidth(500)
     window.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     layout.invalidate()
     layout.activate()

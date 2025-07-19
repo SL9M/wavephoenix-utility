@@ -17,6 +17,18 @@ def step3(window, layout):
     step3instructions.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     
     bootloaderButton = QPushButton("Flash Device")
+    bootloaderButton.setStyleSheet("""
+        QPushButton {
+            background-color: #007aff;
+            color: white;
+        }
+        QPushButton:hover {
+            background-color: #005bb5;
+        }
+        QPushButton:pressed {
+            background-color: #003e85;
+        }
+    """)
     # Next Button
     backHomeButton = QPushButton("Back Home >")
 
