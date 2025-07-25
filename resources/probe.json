@@ -1,0 +1,16 @@
+{
+  "openocd": {
+    "cmsis-dap": {
+      "interface": "interface/cmsis-dap.cfg",
+      "transport": "transport select swd"
+    },
+    "jlink": {
+      "interface": "interface/jlink.cfg",
+      "transport": "transport select swd"
+    },
+    "stlink": {
+      "interface": "interface/stlink.cfg",
+      "transport": "transport select dapdirect_swd"
+    }
+  }
+}

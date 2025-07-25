@@ -33,7 +33,11 @@ def step1(window, layout):
 
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
-    probeTypeDropdown.addItems(["CMSIS-DAP (RPI Pico, Default)"])
+    probeTypeDropdown.addItems([
+        "CMSIS-DAP (RPI Pico, Default)",
+        "J-Link",
+        "ST-Link"
+    ])
 
 
     #Upload Dialogs and path storage
