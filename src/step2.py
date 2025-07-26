@@ -3,6 +3,7 @@ import src.config
 import os
 from src.step3 import step3
 from src.config import clearLayout, getLogOutput, createOCDworker
+from src.probe import probeType
 
 def step2(layout, window):
 
@@ -33,7 +34,7 @@ def step2(layout, window):
     def runOCDcommand():
         ocdCommand = [
             src.config.openocdpath,
-            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
+            "-f", os.path.normpath(probeType[src.config.probeTypeSelected]["interface"]),
             "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", "init; efm32s2_dci_device_erase; shutdown"
         ]

@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import os
-import subprocess
+from src.probe import probeType
 from src.config import createOCDworker, getLogOutput, clearLayout
 
 def testPhoenix(window,layout):
@@ -35,12 +35,12 @@ def testPhoenix(window,layout):
     def runOCDcommand():
         ocdCommand = [
             src.config.openocdpath,
-            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
-            "-c", "transport select swd",
+            "-f", os.path.normpath(probeType[src.config.probeTypeSelected]["interface"]),
+            "-c", probeType[src.config.probeTypeSelected]["transport"],
             "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", "init; reset init; exit"
         ]
-        OCDErrorMessage = ("<p style='font-size:20px;'><b>Command sent! Try pressing the pair button, if it blinks you're ready to assemble!</b></p>")
+        OCDErrorMessage = ("<p style='font-size:20px;'><b>Command sent. Try pressing the pair button, if it blinks you're ready to assemble!</b></p>")
         OCDSuccessMessage = ('<p style="font-size:20px;"><b>Device appears to be blank or in bootloader mode. Try power cycling or re-flashing.</b></p>')
         createOCDworker(ocdCommand, OCDSuccessMessage, OCDErrorMessage, window)
        

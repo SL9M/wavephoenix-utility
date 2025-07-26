@@ -9,6 +9,10 @@ probeType = {
   },
   "ST-Link": {
     "interface": "interface/stlink.cfg",
+    "transport": "transport select swd"
+  },
+  "ST-Link DAP Direct": {
+    "interface": "interface/stlink.cfg",
     "transport": "transport select dapdirect_swd"
   }
 }

@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import  QLabel, QPushButton, QSizePolicy
 import src.config
 import os
-import time
 from src.config import clearLayout, getLogOutput, createOCDworker
+from src.probe import probeType
 
 def step3(window, layout):
 
@@ -35,17 +35,16 @@ def step3(window, layout):
     def runOCDcommand():
         bootloaderOCDCommand = [
             src.config.openocdpath,
-            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
-            "-c", "transport select swd",
+            "-f", os.path.normpath(probeType[src.config.probeTypeSelected]["interface"]),
+            "-c", probeType[src.config.probeTypeSelected]["transport"],
             "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", f'init; halt; flash write_image erase "{src.config.bootloaderpath}"; exit'
         ]
-        bootloaderOCDSuccessMessage = ('<p style="font-size:20px;"><b>Successful bootloader flash!</b></p><p>You can proceed to the next step.</p>')
         
         firmwareOCDCommand = [
             src.config.openocdpath,
-            "-f", os.path.normpath("interface/cmsis-dap.cfg"),
-            "-c", "transport select swd",
+            "-f", os.path.normpath(probeType[src.config.probeTypeSelected]["interface"]),
+            "-c", probeType[src.config.probeTypeSelected]["transport"],
             "-f", os.path.normpath("target/efm32s2.cfg"),
             "-c", f'init; halt; flash write_image erase "{src.config.receiverpath}"; exit'
         ]

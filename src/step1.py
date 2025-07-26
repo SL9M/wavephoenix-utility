@@ -32,7 +32,8 @@ def step1(window, layout):
     probeTypeDropdown.addItems([
         "CMSIS-DAP (RPI Pico, Default)",
         "J-Link",
-        "ST-Link"
+        "ST-Link",
+        "ST-Link DAP Direct"
     ])
     probeTypeDropdown.currentTextChanged.connect(probe_type_changed)
     src.config.probeTypeSelected = probeTypeDropdown.currentText()
