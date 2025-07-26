@@ -26,6 +26,11 @@ else:
 bootloaderpath = ""
 receiverpath = ""
 logOutput = None
+probeTypeSelected = "CMSIS-DAP (RPI Pico, Default)"
+
+def probe_type_changed(selection):
+    global probeTypeSelected
+    probeTypeSelected = selection
 
 def getLogOutput():
     global logOutput

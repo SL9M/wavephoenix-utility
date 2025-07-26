@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import  QLabel, QFileDialog, QPushButton, QLineEdit, QComboBox, QSizePolicy, QHBoxLayout, QVBoxLayout
-from src.config import openocdpath, bootloaderpath, receiverpath, clearLayout
+from src.config import openocdpath, bootloaderpath, receiverpath, clearLayout, probe_type_changed
 import src.config
 from src.step2 import step2
-import src.config
 import os
 from PyQt6.QtCore import QSize
 
@@ -28,9 +27,6 @@ def step1(window, layout):
     testButton = QPushButton("Test Device")
     testButton.setFixedHeight(35)
 
-
-    #nextButton.setEnabled(False)
-
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
     probeTypeDropdown.addItems([
@@ -38,6 +34,8 @@ def step1(window, layout):
         "J-Link",
         "ST-Link"
     ])
+    probeTypeDropdown.currentTextChanged.connect(probe_type_changed)
+    src.config.probeTypeSelected = probeTypeDropdown.currentText()
 
 
     #Upload Dialogs and path storage
