@@ -17,19 +17,19 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 ## Current Features
 1. Erase & flash WavePhoenix devices easily
 2. Links user to bootloader & firmware downloads
-3. Github release bundles include OpenOCD with efm32s2 support - no extra software needed!
+3. Bundled OpenOCD with efm32s2 support
 4. Step by step on screen guide
 5. Seperate window with logs & console output for debugging and transparency
 6. Support for macOS & Linux
 7. Robust error handling with troubleshooting steps included
+8. Support for CMSIS-DAP J-Link, and ST-Link
 
 ## Planned Features
 1. "Pro" layout - all features in one window. Ideal for creating batches
-5. Support for J-Link, and ST-Link
 
 ## Credits
 Credit largely goes to loopj for the core [WavePhoenix project](https://github.com/loopj/wavephoenix/tree/main/hardware/mini-receiver). Without Loopj's hard work, this tool would have no reason to exist.
 
 Special thanks to members of the GameCube modding community for inspiring me to make this.
 
-Built with Python3, PyQt6, OpenOCD, and bundled using PyInstaller.
+Shout-out to the dependencies: Python3.12, PyQt6, Arduino OpenOCD fork, pkexec, AppPmage, and PyInstaller.
