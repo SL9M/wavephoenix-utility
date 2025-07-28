@@ -29,15 +29,22 @@ def step1(window, layout):
 
     # Probe type dropdown variables
     probeTypeDropdown = QComboBox()
-    probeTypeDropdown.addItems([
+    probeTypeOptions = [
         "CMSIS-DAP (RPI Pico, Default)",
         "J-Link",
         "ST-Link",
         "ST-Link DAP Direct"
-    ])
-    probeTypeDropdown.currentTextChanged.connect(probe_type_changed)
-    src.config.probeTypeSelected = probeTypeDropdown.currentText()
+    ]
+    probeTypeDropdown.addItems(probeTypeOptions)
 
+    # Restore dropdown to chosen probe
+    if src.config.probeTypeSelected in probeTypeOptions:
+        probeTypeDropdown.setCurrentText(src.config.probeTypeSelected)
+    else:
+        probeTypeDropdown.setCurrentText("CMSIS-DAP (RPI Pico, Default)")
+        src.config.probeTypeSelected = "CMSIS-DAP (RPI Pico, Default)"
+
+    probeTypeDropdown.currentTextChanged.connect(probe_type_changed)
 
     #Upload Dialogs and path storage
     def file_dialog_openocd():
