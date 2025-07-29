@@ -26,6 +26,7 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 
 ## Planned Features
 1. "Pro" layout - all features in one window. Ideal for creating batches
+2. Olimex ARM-USB-TINY-H & FLYSWATTER2 - FTDI Probe Support
 
 ## Credits
 Credit largely goes to loopj for the core [WavePhoenix project](https://github.com/loopj/wavephoenix/tree/main/hardware/mini-receiver). Without Loopj's hard work, this tool would have no reason to exist.
