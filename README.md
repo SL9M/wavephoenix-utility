@@ -7,7 +7,7 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 ## Usage
 1. Download [latest release](https://github.com/SL9M/wavephoenix-utility/releases/latest)
  from Github releases page. - Chrome may flag it as suspicious, this is expected behavior due to the way it's packaging and executing command line tools.
-2. Download [bootloader and receiver hex files](https://github.com/loopj/wavephoenix/releases/latest) from loopj 
+2. Download [bootloader and receiver hex files](https://github.com/loopj/wavephoenix/releases/latest) from loopj
 3. Extract all contents in the zip file
 4. Launch the executable
 5. Accept SmartScreen/Security prompts
@@ -20,13 +20,15 @@ GUI WavePhoenix flashing software written to help users unfamiliar with commandl
 3. Bundled OpenOCD with efm32s2 support
 4. Step by step on screen guide
 5. Seperate window with logs & console output for debugging and transparency
-6. Support for macOS & Linux
+6. Support for Windows, macOS & Linux
 7. Robust error handling with troubleshooting steps included
 8. Support for CMSIS-DAP J-Link, and ST-Link
 
 ## Planned Features
 1. "Pro" layout - all features in one window. Ideal for creating batches
 2. Olimex ARM-USB-TINY-H & FLYSWATTER2 - FTDI Probe Support
+3. Improved Linux support
+4. Configuration persistence
 
 ## Credits
 Credit largely goes to loopj for the core [WavePhoenix project](https://github.com/loopj/wavephoenix/tree/main/hardware/mini-receiver). Without Loopj's hard work, this tool would have no reason to exist.
